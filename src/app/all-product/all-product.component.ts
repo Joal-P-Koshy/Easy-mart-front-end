@@ -30,12 +30,35 @@ export class AllProductComponent implements OnInit{
     })
   }
 
-  addtoWishlist(){
-    Swal.fire({
-      title: "Added",
-      text: "Successfully added to wishlist",
-      icon: "success"
-    });
+  addtoWishlist(product: any){
+
+    if(sessionStorage.getItem('token')){
+      this.api.addToWishlistApi(product).subscribe({
+        next: (res: any) => {
+          Swal.fire({
+            title: "Added",
+            text: "Successfully added to wishlist",
+            icon: "success"
+          });
+        },
+        error: (res: any) => {
+          Swal.fire({
+            title: "Error",
+            text: res.error,
+            icon: "error"
+          });
+        }
+      })
+    }
+    else{
+      Swal.fire({
+        title: "Warning",
+        text: "Please login",
+        icon: "warning"
+      });
+    }
+
+    
   }
 
   addtoCart(){

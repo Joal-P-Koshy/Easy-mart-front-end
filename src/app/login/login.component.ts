@@ -31,7 +31,7 @@ export class LoginComponent {
         sessionStorage.setItem('username', res.existingUser.username);
         sessionStorage.setItem('token', res.token)
         Swal.fire({
-          title: "Added",
+          title: "Logged in",
           text: "Successfully logged in",
           icon: "success"
         });

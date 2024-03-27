@@ -1,32 +1,36 @@
+
+<app-header></app-header>
+
+
 <section class="wishlist">
 
-    <div class="d-flex justify-content-center flex-column align-items-center">
+    <div *ngIf="wishListItems.length==0" class="d-flex justify-content-center flex-column align-items-center">
         <img src="https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-8664444-6909519.png?f=webp"
             width="400px" alt="">
         <h3 class="text-danger">Your wishlist is empty</h3>
     </div>
 
-    <div class="d-flex justify-content-center align-items-center flex-column">
+    <div  *ngIf="wishListItems.length>0" class="d-flex justify-content-center align-items-center flex-column mt-5">
         <h4 class="">Your wishlist</h4>
 
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <div class="col mb-5">
-                    <div class="card h-100">
+                <div class="col mb-5" *ngFor="let items of wishListItems">
+                    <div class="card h-100" >
                         <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                        <img class="card-img-top p-3" [src]='items.image' height="230px" alt="..." />
                         <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product name-->
-                                <h5 class="fw-bolder">Fancy Product</h5>
+                                <h5 class="fw-bolder">{{items.title}}</h5>
                                 <!-- Product price-->
-                                $40.00 - $80.00
+                                {{items.price}} ₹
                             </div>
                         </div>
                         <!-- Product actions-->
-                        <div class="d-flex justify-content-between m-4">
-                            <a class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
+                        <div class="d-flex justify-content-between ms-3 me-3 mb-3">
+                            <a class="btn btn-outline-danger" (click)="removeItem(items._id)"><i class="fa-solid fa-trash"></i></a>
                             <a class="btn btn-outline-success"><i class="fa-solid fa-cart-shopping"></i></a>
                         </div>
                     </div>
