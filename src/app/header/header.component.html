@@ -19,12 +19,12 @@
           <ul class="navbar-nav  mb-2 mb-lg-0">
             <li>
               <a class="nav-link active" routerLink="/wishlist">
-                  <button class="btn btn-outline-light"><i class="fa-solid fa-heart fa-beat me-2"></i>wishlist<span class="badge bg-secondary ms-2">8</span></button>
+                  <button class="btn btn-outline-light"><i class="fa-solid fa-heart fa-beat me-2"></i>wishlist<span class="badge bg-secondary ms-2">{{wishlistItemCount}}</span></button>
               </a>
             </li>
             <li>
               <a class="nav-link active"routerLink="/cart">
-                  <button class="btn btn-outline-light"><i class="fa-solid fa-cart-shopping me-2"></i>cart<span class="badge bg-secondary ms-2"> 5 </span></button>
+                  <button class="btn btn-outline-light"><i class="fa-solid fa-cart-shopping me-2"></i>cart<span class="badge bg-secondary ms-2"> {{cartItemCount}} </span></button>
               </a>
             </li>
             <li *ngIf="!loginUserName">

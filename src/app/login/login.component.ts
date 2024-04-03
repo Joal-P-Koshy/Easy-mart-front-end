@@ -35,6 +35,7 @@ export class LoginComponent {
           text: "Successfully logged in",
           icon: "success"
         });
+        this.api.updateWishlistCout()
         this.router.navigateByUrl('');
       },
       error: (res: any)=>{

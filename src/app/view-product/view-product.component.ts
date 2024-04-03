@@ -44,6 +44,8 @@ export class ViewProductComponent implements OnInit{
             text: "Successfully added to wishlist",
             icon: "success"
           });
+          this.api.updateWishlistCout()
+          this.api.updateCartCout()
         },
         error: (res: any) => {
           Swal.fire({
@@ -63,6 +65,36 @@ export class ViewProductComponent implements OnInit{
     }
 
     
+  }
+
+
+  addtoCart(product: any) {
+    if (sessionStorage.getItem('token')) {
+      Object.assign(product, { quantity: 1 })
+      this.api.addToCartApi(product).subscribe({
+        next: (res: any) => {
+          Swal.fire({
+            title: "Added",
+            text: "Successfully added to cart",
+            icon: "success"
+          });
+        },
+        error: (res: any) => {
+          Swal.fire({
+            title: "Error",
+            text: res.error,
+            icon: "error"
+          });
+        }
+      })
+    }
+    else {
+      Swal.fire({
+        title: "Warning",
+        text: "Please login",
+        icon: "warning"
+      });
+    }
   }
 
 }
