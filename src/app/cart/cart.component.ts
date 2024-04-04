@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -11,9 +12,9 @@ export class CartComponent implements OnInit {
 
   cartItems: any = []
 
-  totalAmount: number = 0;
+  totalAmount: any = 0;
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private route : Router) { }
 
   ngOnInit(): void {
     this.getAllCartItems();
@@ -84,9 +85,25 @@ export class CartComponent implements OnInit {
       },
       error: (res: any) => {
         console.log(res);
-        
       }
     })
+  }
+
+  emptyCart(){
+    this.api.emptyCartItems().subscribe({
+      next: (res: any) => {
+        this.getAllCartItems()
+        this.api.updateCartCout()
+      },
+      error: (res: any) => {
+        console.log(res);
+      }
+    })
+  }
+
+  checkout(){
+    sessionStorage.setItem('totalAmount', this.totalAmount)
+    this.route.navigateByUrl("checkout")
   }
 
 }

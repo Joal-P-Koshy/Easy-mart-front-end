@@ -107,4 +107,9 @@ export class ApiService {
     return this.http.get(`${this.server_url}/cart/decrement/${id}`, this.addTokenHeader())
   }
 
+  // remove all items in cart
+  emptyCartItems() {
+    return this.http.delete(`${this.server_url}/removeCart`, this.addTokenHeader())
+  }
+
 }
